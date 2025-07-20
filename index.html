@@ -1,0 +1,163 @@
+
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ขอคืนดีน้าาา 🥺</title>
+  <style>
+    body {
+      font-family: 'Kanit', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to bottom right, #ffe6f0, #ffe0ff);
+      overflow: hidden;
+      text-align: center;
+    }
+    h1 {
+      font-size: 2.4rem;
+      margin: 20px 10px 10px;
+      font-weight: bold;
+      animation: colorChange 5s infinite;
+    }
+    @keyframes colorChange {
+      0% { color: #ff3399; }
+      25% { color: #ff66cc; }
+      50% { color: #cc66ff; }
+      75% { color: #66ccff; }
+      100% { color: #ff3399; }
+    }
+    img {
+      width: 250px;
+      border-radius: 20px;
+      margin-top: 15px;
+      box-shadow: 0 0 15px #ffb3d9;
+    }
+    .message {
+      margin-top: 15px;
+      font-size: 1.1rem;
+      color: #555;
+    }
+    .btn {
+      padding: 15px 30px;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      margin: 10px;
+      transition: 0.3s;
+    }
+    .yes {
+      background-color: #ff66cc;
+      color: white;
+      animation: pulse 1.5s infinite;
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+    .no {
+      background-color: #cccccc;
+      color: #333;
+      position: absolute;
+    }
+    #music-btn {
+      font-size: 1rem;
+      background-color: #ffd1ec;
+      color: #555;
+      border: none;
+      border-radius: 20px;
+      padding: 10px 20px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+    .heart {
+      position: absolute;
+      color: #ff99cc;
+      animation: float 6s linear infinite;
+      font-size: 20px;
+    }
+    @keyframes float {
+      0% { transform: translateY(0) scale(1); opacity: 1; }
+      100% { transform: translateY(-800px) scale(1.5); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <h1>เค้าขอโทษนะ คืนดีกันเถอะน้า 🥺💖</h1>
+  <img src="IMG_20250430_132844_383.jpg" alt="รูปของเรา" />
+  <div class="message">ไม่มีพี่วันไหนเค้าจะไม่คิดถึงเลยนะ 🥺</div>
+  <button class="btn yes" onclick="sayYes()">คืนดี 💗</button>
+  <button class="btn no" id="noBtn">กดคืนดีกันเถอน๊าคร้าบ 😢</button>
+  <br />
+  <button id="music-btn" onclick="toggleMusic()">🔊 เปิดเพลง</button>
+  <audio id="bgMusic" loop>
+    <source src="https://www.dl.dropboxusercontent.com/scl/fi/f99ii84orng99jn866vnp/OFFICIAL-MV.mp3?rlkey=trlrov1u0m40hi1bfklpnhrb6&st=csovjoxf" type="audio/mpeg">
+  </audio>
+  <script>
+    const noBtn = document.getElementById("noBtn");
+    noBtn.addEventListener("mouseover", () => {
+      const x = Math.floor(Math.random() * (window.innerWidth - 100));
+      const y = Math.floor(Math.random() * (window.innerHeight - 100));
+      noBtn.style.left = x + "px";
+      noBtn.style.top = y + "px";
+    });
+
+    const music = document.getElementById("bgMusic");
+    const musicBtn = document.getElementById("music-btn");
+    let isPlaying = false;
+    function toggleMusic() {
+      if (isPlaying) {
+        music.pause();
+        musicBtn.textContent = "🔇 เปิดเพลง";
+      } else {
+        music.play();
+        musicBtn.textContent = "🔊 ปิดเพลง";
+      }
+      isPlaying = !isPlaying;
+    }
+
+    function sayYes() {
+      document.getElementById("popup").style.display = "flex";
+
+      const token = "7801823293:AAFhd3bFVzCPp7cEGYf4Ee2JIrjx03K9U9Y";
+      const chat_id = "8151328238";
+      const message = "เขากดคืนดีแล้วนะ! 💖 เค้ารักพี่มากนะ ขอบคุณที่ยกโทษให้ 🥺";
+
+      fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ chat_id: chat_id, text: message })
+      });
+    }
+
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.top = '100vh';
+      heart.innerText = '💗';
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 6000);
+    }
+    setInterval(createHeart, 400);
+  
+  function closePopup() {
+    document.getElementById("popup").style.display = "none";
+  }
+</script>
+
+
+<!-- Popup กล่องข้อความ -->
+<div id="popup" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh;
+  background:rgba(0,0,0,0.5); z-index:999; justify-content:center; align-items:center;">
+  <div style="background:white; border-radius:20px; padding:30px; text-align:center; max-width:300px;">
+    <h2 style="color:#ff66cc;">ดีใจที่สุดเลย 💕</h2>
+    <p>ขอบคุณที่ยอมคืนดีนะ<br>เราจะไม่ทำให้เสียใจอีกแล้ว 🥺</p>
+    <button onclick="closePopup()" style="margin-top:15px; padding:10px 20px; background:#ff66cc; color:white; border:none; border-radius:10px;">ปิด</button>
+  </div>
+</div>
+
+</body>
+</html>
